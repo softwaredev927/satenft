@@ -1,0 +1,35 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: sateNFT
+    network: mainnet
+    source:
+      address: "0x48470fb3fe7108b9e15b2bf7aa15b7adf774d721"
+      abi: sateNFT
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Sate
+      abis:
+        - name: sateNFT
+          file: ./abis/sateNFT.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: SateContractDeployed()
+          handler: handleSateContractDeployed
+        - event: SateCreatorUpdated(indexed uint256,address)
+          handler: handleSateCreatorUpdated
+        - event: SateInfoUpdated(indexed uint256,uint256,uint256,uint8)
+          handler: handleSateInfoUpdated
+        - event: SateTokenUriUpdated(indexed uint256,string)
+          handler: handleSateTokenUriUpdated
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

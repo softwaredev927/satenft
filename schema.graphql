@@ -1,0 +1,6 @@
+type Sate @entity {
+  id: ID!
+  launchTime: BigInt!
+  launchPrice: BigInt!
+  apr: Int!
+}
